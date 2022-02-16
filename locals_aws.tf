@@ -6,5 +6,4 @@ locals {
   account_id = data.aws_caller_identity.current.account_id
   region     = data.aws_region.current.name
   partition  = data.aws_partition.current.id
-  stack_name = "test_stack_name" # TODO
 }

@@ -1,4 +1,3 @@
-
 data "aws_iam_policy_document" "lambda_execution" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -23,7 +22,7 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
     ]
   }
   statement {
-    actions = ["cloudwatch:PutMetricData"]
+    actions   = ["cloudwatch:PutMetricData"]
     resources = ["*"]
   }
 
@@ -39,39 +38,37 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
     ]
   }
   statement {
-    actions = ["route53:ListHostedZones"]
+    actions   = ["route53:ListHostedZones"]
     resources = ["*"]
   }
 
   # Secrets Manager permissions
-  # TODO: refactor -aholmquist 2022-02-14
   statement {
-    actions = (var.sidecar_secrets_manager_role_arn == "") ? ([
+    actions = local.should_use_different_account ? ([
+      "sts:AssumeRole"
+      ]) : ([
       "secretsmanager:CreateSecret",
       "secretsmanager:DeleteSecret",
       "secretsmanager:GetSecretValue",
       "secretsmanager:UpdateSecret"
-      ]) : ([
-      "sts:AssumeRole"
     ])
-
-    resources = (var.sidecar_secrets_manager_role_arn == "") ? ([
-      "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecar-certificate/*"
-      ]) : ([
+    resources = local.should_use_different_account ? ([
       var.sidecar_secrets_manager_role_arn
+      ]) : ([
+      "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecar-certificate/*"
     ])
   }
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name               = "lambda_execution_role"
-  path               = "/" # TODO: Test -aholmquist 2022-02-14
+  name               = "${var.deployment_id}-LambdaExecutionRole-${random_id.current.id}"
+  path               = "/"
   assume_role_policy = data.aws_iam_policy_document.lambda_execution.json
 }
 
 resource "aws_iam_policy" "lambda_execution_policy" {
-  name   = "lambda_execution_policy"
-  path   = "/" # TODO: Test -aholmquist 2022-02-14
+  name   = "${var.deployment_id}-LambdaExecutionPolicy-${random_id.current.id}"
+  path   = "/"
   policy = data.aws_iam_policy_document.lambda_execution_policy.json
 }
 

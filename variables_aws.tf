@@ -1,10 +1,21 @@
+variable "deployment_id" {
+  description = "Identifier used to generate unique resource names. This is equivalent to AWS' CloudFormation stack name."
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.deployment_id != ""
+    error_message = "The deployment identifier cannot be empty."
+  }
+}
+
 variable "sidecar_domain" {
   description = "The domain to generate a certificate for. Ex: my-snowflake-sidecar.mydomain.com"
   type        = string
   default     = ""
 
   validation {
-    condition = var.sidecar_domain != ""
+    condition     = var.sidecar_domain != ""
     error_message = "The sidecar domain cannot be empty."
   }
 }
@@ -78,11 +89,11 @@ variable "renewal_interval_days" {
 variable "renew_days_before_expiry" {
   description = "Number of days before expiry date to renew the certificate."
   type        = number
-  default     = 30
+  default     = 35
 
   validation {
-    condition     = 7 <= var.renew_days_before_expiry && var.renew_days_before_expiry <= 60
-    error_message = "Valid values range from 7 to 60."
+    condition     = (30 <= var.renew_days_before_expiry && var.renew_days_before_expiry <= 60)
+    error_message = "Valid values range from 30 to 60."
   }
 }
 
@@ -92,7 +103,7 @@ variable "sidecar_secrets_manager_role_arn" {
   default     = ""
 
   validation {
-    condition     = can(regex("(arn:.+:iam::[0-9]{12}:role/.+)?", var.sidecar_secrets_manager_role_arn))
+    condition     = can(regex("^(arn:.+:iam::[0-9]{12}:role/.+)?$", var.sidecar_secrets_manager_role_arn))
     error_message = "Please use a valid IAM role ARN."
   }
 }
