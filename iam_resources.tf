@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
     resources = local.should_use_different_account ? ([
       var.sidecar_secrets_manager_role_arn
       ]) : ([
-      "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecar-certificate/*"
+      "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecars/certificate/*"
     ])
   }
 }

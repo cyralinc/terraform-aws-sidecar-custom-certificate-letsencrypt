@@ -14,9 +14,9 @@ resource "aws_lambda_function" "lambda_function" {
       CERTIFICATE_MANAGER_REGISTRATION_EMAIL       = var.registration_email
       CERTIFICATE_MANAGER_SNOWFLAKE_ACCOUNT_REGION = var.snowflake_account_region
       CERTIFICATE_MANAGER_SECRET_NAME = var.certificate_secret_suffix == "" ? (
-        "/cyral/sidecar-certificate/${var.deployment_id}"
+        "/cyral/sidecars/certificate/${var.deployment_id}"
         ) : (
-        "/cyral/sidecar-certificate/${var.certificate_secret_suffix}"
+        "/cyral/sidecars/certificate/${var.certificate_secret_suffix}"
       )
       CERTIFICATE_MANAGER_RENEW_DAYS_BEFORE_EXPIRY    = var.renew_days_before_expiry
       CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGE_ROLE = var.sidecar_secrets_manager_role_arn
