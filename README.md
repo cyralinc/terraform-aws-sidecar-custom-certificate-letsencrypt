@@ -1,3 +1,12 @@
+# Cyral Sidecar Certificate Manager module for Terraform
+
+## Usage
+
+```hcl
+# TODO: when this module is published to the Terraform registry, add module
+usage here -aholmquist 2022-02-17
+```
+
 ## Requirements
 
 | Name | Version |

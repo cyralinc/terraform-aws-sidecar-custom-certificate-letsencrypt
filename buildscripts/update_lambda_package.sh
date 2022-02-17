@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# Updates the S3 object reference in the lambda resource to the latest
+# available.
+
 set -xe
 
-# Set the capitalized env variables before running the script!
+# Set the capitalized ENVIRONMENT VARIABLES before running the script
+#
+# * REGION -- required
+# * BUCKET -- optional
+#
 region=${REGION}
 bucket="cyral-public-assets-${region}" # Default value
 if [ "${BUCKET}" != "" ]; then

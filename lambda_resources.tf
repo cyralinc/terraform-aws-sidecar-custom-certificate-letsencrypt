@@ -24,8 +24,8 @@ resource "aws_lambda_function" "lambda_function" {
   }
 }
 
-# first_invocation emulates the lambda function being called from
-# CloudFormation at time of stack creation.
+# first_invocation emulates the lambda function being called from CloudFormation
+# at time of stack creation.
 resource "aws_lambda_invocation" "first_invocation" {
   function_name = aws_lambda_function.lambda_function.function_name
   input         = jsonencode({})
