@@ -1,4 +1,8 @@
-data "aws_iam_policy_document" "lambda_execution" {
+locals {
+  should_use_different_account = var.sidecar_secrets_manager_role_arn != ""
+}
+
+data "aws_iam_policy_document" "lambda-execution" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
@@ -8,7 +12,7 @@ data "aws_iam_policy_document" "lambda_execution" {
   }
 }
 
-data "aws_iam_policy_document" "lambda_execution_policy" {
+data "aws_iam_policy_document" "lambda-execution-policy" {
   # Cloudwatch permissions
   statement {
     actions = [
@@ -60,19 +64,19 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
   }
 }
 
-resource "aws_iam_role" "lambda_execution_role" {
-  name               = "${var.deployment_id}-LambdaExecutionRole-${random_id.current.id}"
+resource "aws_iam_role" "lambda-execution-role" {
+  name               = "CyralSidecarCertificateManagerLambdaExecutionRole-${random_id.current.id}"
   path               = "/"
-  assume_role_policy = data.aws_iam_policy_document.lambda_execution.json
+  assume_role_policy = data.aws_iam_policy_document.lambda-execution.json
 }
 
-resource "aws_iam_policy" "lambda_execution_policy" {
-  name   = "${var.deployment_id}-LambdaExecutionPolicy-${random_id.current.id}"
+resource "aws_iam_policy" "lambda-execution-policy" {
+  name   = "CyralSidecarCertificateManagerLambdaExecutionPolicy-${random_id.current.id}"
   path   = "/"
-  policy = data.aws_iam_policy_document.lambda_execution_policy.json
+  policy = data.aws_iam_policy_document.lambda-execution-policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_execution_policy" {
-  role       = aws_iam_role.lambda_execution_role.name
-  policy_arn = aws_iam_policy.lambda_execution_policy.arn
+resource "aws_iam_role_policy_attachment" "lambda-execution-policy" {
+  role       = aws_iam_role.lambda-execution-role.name
+  policy_arn = aws_iam_policy.lambda-execution-policy.arn
 }

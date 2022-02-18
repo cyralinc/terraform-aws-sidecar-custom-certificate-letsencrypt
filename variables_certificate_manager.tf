@@ -58,12 +58,6 @@ variable "snowflake_account_region" {
   }
 }
 
-variable "certificate_secret_suffix" {
-  description = "Name suffix of the secret that will store the certificate. Default is the name of this stack."
-  type        = string
-  default     = ""
-}
-
 variable "renewal_interval_days" {
   description = "How often to check if certificate should be renewed, in days."
   type        = number

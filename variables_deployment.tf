@@ -1,11 +1,11 @@
-variable "deployment_id" {
-  description = "Identifier used to generate unique resource names. This is equivalent to AWS' CloudFormation stack name."
+variable "certificate_manager_version" {
+  description = "Version of the Certificate Manager Lambda code."
   type        = string
-  default     = ""
+  default     = "v0.1.0"
 
   validation {
-    condition     = var.deployment_id != ""
-    error_message = "The deployment identifier cannot be empty."
+    condition     = var.certificate_manager_version != ""
+    error_message = "Certificate manager version and s3 location (bucket and key) cannot both be empty."
   }
 }
 
