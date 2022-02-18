@@ -2,11 +2,6 @@ variable "certificate_manager_version" {
   description = "Version of the Certificate Manager Lambda code."
   type        = string
   default     = "v0.1.0"
-
-  validation {
-    condition     = var.certificate_manager_version != ""
-    error_message = "Certificate manager version and s3 location (bucket and key) cannot both be empty."
-  }
 }
 
 variable "certificate_manager_code_s3_bucket" {

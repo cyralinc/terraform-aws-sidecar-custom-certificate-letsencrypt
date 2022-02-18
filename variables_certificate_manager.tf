@@ -1,12 +1,6 @@
 variable "sidecar_domain" {
   description = "The domain to generate a certificate for. Ex: my-snowflake-sidecar.mydomain.com"
   type        = string
-  default     = ""
-
-  validation {
-    condition     = var.sidecar_domain != ""
-    error_message = "The sidecar domain cannot be empty."
-  }
 }
 
 variable "sidecar_subdomains" {
