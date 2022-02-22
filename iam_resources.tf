@@ -51,8 +51,6 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
     actions = local.should_use_different_account ? ([
       "sts:AssumeRole"
       ]) : ([
-      "secretsmanager:CreateSecret",
-      "secretsmanager:DeleteSecret",
       "secretsmanager:GetSecretValue",
       "secretsmanager:UpdateSecret"
     ])
