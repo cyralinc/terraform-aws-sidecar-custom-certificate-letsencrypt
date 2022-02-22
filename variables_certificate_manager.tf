@@ -9,12 +9,6 @@ variable "sidecar_subdomains" {
   default     = ""
 }
 
-variable "registration_email" {
-  description = "Administrative email to use for registration and recovery contact with Let's Encrypt."
-  type        = string
-  default     = ""
-}
-
 variable "snowflake_account_region" {
   description = "The AWS region your Snowflake account is running on. Ex: us-east-1"
   type        = string
@@ -50,6 +44,12 @@ variable "snowflake_account_region" {
     ], var.snowflake_account_region)
     error_message = "Please enter a valid AWS region name."
   }
+}
+
+variable "registration_email" {
+  description = "Administrative email to use for registration and recovery contact with Let's Encrypt."
+  type        = string
+  default     = ""
 }
 
 variable "renewal_interval_days" {
