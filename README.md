@@ -4,7 +4,7 @@
 
 ```hcl
 module "cyral_sidecar_certificate_manager" {
-  source = "cyralinc/sidecar-certificate-manager/cyral"
+  source  = "cyralinc/sidecar-certificate-manager/cyral"
   version = ">= 1.0.0"
 
   # Required

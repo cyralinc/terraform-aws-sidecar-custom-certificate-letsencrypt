@@ -11,7 +11,7 @@ variable "staging_certificate" {
 
   validation {
     condition     = contains(["false", "true"], var.staging_certificate)
-    error_message = "Valid values are 'false' or 'true'."
+    error_message = "Valid values are 'false' and 'true'."
   }
 }
 
