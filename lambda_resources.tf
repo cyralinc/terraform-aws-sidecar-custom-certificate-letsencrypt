@@ -1,18 +1,18 @@
 locals {
-  s3_deployment_code_bucket = var.certificate_manager_code_s3_bucket != "" ? (
-    var.certificate_manager_code_s3_bucket
+  s3_deployment_code_bucket = var.lambda_code_s3_bucket != "" ? (
+    var.lambda_code_s3_bucket
     ) : (
     "cyral-public-assets-${local.region}"
   )
-  s3_deployment_code_key = var.certificate_manager_code_s3_key != "" ? (
-    var.certificate_manager_code_s3_key
+  s3_deployment_code_key = var.lambda_code_s3_key != "" ? (
+    var.lambda_code_s3_key
     ) : (
-    "sidecar-certificate-manager/${var.certificate_manager_version}/sidecar-certificate-manager-lambda-${var.certificate_manager_version}.zip"
+    "sidecar-certificate-casigned/${var.lambda_code_version}/sidecar-certificate-casigned-lambda-${var.lambda_code_version}.zip"
   )
 }
 
 resource "aws_lambda_function" "lambda_function" {
-  function_name = "CyralSidecarCertificateManager-${random_id.current.id}"
+  function_name = "CyralSidecarCertificateCasigned-${random_id.current.id}"
   role          = aws_iam_role.lambda_execution_role.arn
   runtime       = "python3.8"
   handler       = "lambda_index.lambda_handler"

@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_event_rule" "renewal_event" {
-  name                = "CyralSidecarCertificateManagerEventsRule-${random_id.current.id}"
-  description         = "Triggers the certificate manager Lambda as specified by the scheduled expression."
+  name                = "CyralSidecarCertificateCasignedEventsRule-${random_id.current.id}"
+  description         = "Triggers the Sidecar Certificate CA-Signed Lambda function as specified by the scheduled expression."
   is_enabled          = true
   schedule_expression = "cron(0 0 */${var.renewal_interval_days} * ? *)"
 }

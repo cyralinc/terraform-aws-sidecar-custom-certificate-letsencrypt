@@ -1,5 +1,6 @@
-# To deploy the Sidecar Certificate Manager for a sidecar hosted in a different
-# AWS account, use the `sidecar_secrets_manager_role_arn` variable.
+# To deploy the Sidecar Certificate CA-Signed application for a sidecar hosted
+# in a different AWS account, use the `sidecar_secrets_manager_role_arn`
+# variable.
 #
 # The sidecar deployment should generate a proper IAM role to be used here, so
 # you usually don't have to worry about it. If you want to understand how this
@@ -18,8 +19,8 @@
 # 3. On the following resource:
 #    - `arn:aws:secretsmanager:us-east-1:222222222222:secret:/cyral/sidecars/certificate/*`
 #
-module "cyral_sidecar_certificate_manager" {
-  source = "cyralinc/sidecar-certificate-manager/cyral"
+module "cyral_sidecar_certificate_casigned" {
+  source = "cyralinc/sidecar-certificate-casigned/cyral"
   version = ">= 1.0.0"
 
   sidecar_domain = "my-sidecar.my-domain.com"
