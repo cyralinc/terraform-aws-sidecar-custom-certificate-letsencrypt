@@ -1,10 +1,10 @@
 locals {
-  s3_deployment_code_bucket = var.lambda_code_s3_bucket != "" ? (
+  lambda_code_real_s3_bucket = var.lambda_code_s3_bucket != "" ? (
     var.lambda_code_s3_bucket
     ) : (
     "cyral-public-assets-${local.region}"
   )
-  s3_deployment_code_key = var.lambda_code_s3_key != "" ? (
+  lambda_code_real_s3_key = var.lambda_code_s3_key != "" ? (
     var.lambda_code_s3_key
     ) : (
     "sidecar-certificate-casigned/${var.lambda_code_version}/sidecar-certificate-casigned-lambda-${var.lambda_code_version}.zip"
@@ -12,13 +12,13 @@ locals {
 }
 
 resource "aws_lambda_function" "lambda_function" {
-  function_name = "CyralSidecarCertificateCasigned-${random_id.current.id}"
+  function_name = "CyralSidecarCertificateCASigned-${random_id.current.id}"
   role          = aws_iam_role.lambda_execution_role.arn
   runtime       = "python3.8"
   handler       = "lambda_index.lambda_handler"
   timeout       = 300
-  s3_bucket     = local.s3_deployment_code_bucket
-  s3_key        = local.s3_deployment_code_key
+  s3_bucket     = local.lambda_code_real_s3_bucket
+  s3_key        = local.lambda_code_real_s3_key
 
   environment {
     variables = {

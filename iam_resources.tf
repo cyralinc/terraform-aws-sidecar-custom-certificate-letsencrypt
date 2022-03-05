@@ -63,13 +63,13 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name               = "CyralSidecarCertificateCasignedLambdaExecutionRole-${random_id.current.id}"
+  name               = "CyralSidecarCertificateCASignedLambdaExecutionRole-${random_id.current.id}"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.lambda_execution.json
 }
 
 resource "aws_iam_policy" "lambda_execution_policy" {
-  name   = "CyralSidecarCertificateCasignedLambdaExecutionPolicy-${random_id.current.id}"
+  name   = "CyralSidecarCertificateCASignedLambdaExecutionPolicy-${random_id.current.id}"
   path   = "/"
   policy = data.aws_iam_policy_document.lambda_execution_policy.json
 }

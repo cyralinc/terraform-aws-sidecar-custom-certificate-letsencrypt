@@ -1,4 +1,4 @@
-# Cyral Sidecar Certificate Casigned module for Terraform
+# Cyral Sidecar Certificate CASigned module for Terraform
 
 ## Usage
 

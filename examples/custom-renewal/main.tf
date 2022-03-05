@@ -4,8 +4,8 @@
 #
 # For the configuration below, the application will check the certificate
 # every day, and renew if there are no more than 30 days left until expiry.
-module "cyral_sidecar_certificate_manager" {
-  source = "cyralinc/sidecar-certificate-manager/cyral"
+module "cyral_sidecar_certificate_casigned" {
+  source = "cyralinc/sidecar-certificate-casigned/cyral"
   version = ">= 1.0.0"
 
   sidecar_domain = "my-sidecar.my-domain.com"
