@@ -15,14 +15,3 @@ variable "lambda_code_s3_key" {
   type        = string
   default     = ""
 }
-
-variable "staging_certificate" {
-  description = "Enter true to use a staging (test) certificate. ONLY FOR TESTING, A STAGING CERTIFICATE IS NOT VALID FOR PRODUCTION USE."
-  type        = string
-  default     = "false"
-
-  validation {
-    condition     = contains(["false", "true"], var.staging_certificate)
-    error_message = "Valid values are 'false' and 'true'."
-  }
-}
