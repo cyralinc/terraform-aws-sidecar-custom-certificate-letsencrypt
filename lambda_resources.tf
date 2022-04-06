@@ -1,35 +1,40 @@
 locals {
-  s3_deployment_code_bucket = var.certificate_manager_code_s3_bucket != "" ? (
-    var.certificate_manager_code_s3_bucket
+  lambda_code_real_s3_bucket = var.lambda_code_s3_bucket != "" ? (
+    var.lambda_code_s3_bucket
     ) : (
     "cyral-public-assets-${local.region}"
   )
-  s3_deployment_code_key = var.certificate_manager_code_s3_key != "" ? (
-    var.certificate_manager_code_s3_key
+  lambda_code_real_s3_key = var.lambda_code_s3_key != "" ? (
+    var.lambda_code_s3_key
     ) : (
-    "sidecar-certificate-manager/${var.certificate_manager_version}/sidecar-certificate-manager-lambda-${var.certificate_manager_version}.zip"
+    "sidecar-certificate-casigned/${var.lambda_code_version}/sidecar-certificate-casigned-lambda-${var.lambda_code_version}.zip"
+  )
+  certificate_secret_id = local.should_use_different_account ? (
+    var.sidecar_certficate_casigned_secret_arn
+    ) : (
+    aws_secretsmanager_secret.certificate_secret[0].id
   )
 }
 
 resource "aws_lambda_function" "lambda_function" {
-  function_name = "CyralSidecarCertificateManager-${random_id.current.id}"
+  function_name = "CyralSidecarCertificateCASigned-${random_id.current.id}"
   role          = aws_iam_role.lambda_execution_role.arn
   runtime       = "python3.8"
   handler       = "lambda_index.lambda_handler"
   timeout       = 300
-  s3_bucket     = local.s3_deployment_code_bucket
-  s3_key        = local.s3_deployment_code_key
+  s3_bucket     = local.lambda_code_real_s3_bucket
+  s3_key        = local.lambda_code_real_s3_key
 
   environment {
     variables = {
-      CERTIFICATE_MANAGER_SECRET_ID                   = aws_secretsmanager_secret.certificate_secret.id
-      CERTIFICATE_MANAGER_SIDECAR_DOMAIN              = var.sidecar_domain
-      CERTIFICATE_MANAGER_SIDECAR_SUBDOMAIN           = var.sidecar_subdomains
-      CERTIFICATE_MANAGER_SNOWFLAKE_ACCOUNT_REGION    = var.snowflake_account_region
-      CERTIFICATE_MANAGER_IS_STAGING_CERTIFICATE      = var.staging_certificate
-      CERTIFICATE_MANAGER_REGISTRATION_EMAIL          = var.registration_email
-      CERTIFICATE_MANAGER_RENEW_DAYS_BEFORE_EXPIRY    = var.renew_days_before_expiry
-      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGE_ROLE = var.sidecar_secrets_manager_role_arn
+      CERTIFICATE_MANAGER_SECRET_ID                    = local.certificate_secret_id
+      CERTIFICATE_MANAGER_SIDECAR_DOMAIN               = var.sidecar_domain
+      CERTIFICATE_MANAGER_SIDECAR_SUBDOMAIN            = var.sidecar_subdomains
+      CERTIFICATE_MANAGER_SNOWFLAKE_ACCOUNT_REGION     = var.snowflake_account_region
+      CERTIFICATE_MANAGER_IS_STAGING_CERTIFICATE       = var.staging_certificate
+      CERTIFICATE_MANAGER_REGISTRATION_EMAIL           = var.registration_email
+      CERTIFICATE_MANAGER_RENEW_DAYS_BEFORE_EXPIRY     = var.renew_days_before_expiry
+      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGER_ROLE = var.sidecar_certificate_casigned_role_arn
     }
   }
 }

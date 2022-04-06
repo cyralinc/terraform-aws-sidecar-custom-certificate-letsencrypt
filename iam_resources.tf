@@ -1,7 +1,3 @@
-locals {
-  should_use_different_account = var.sidecar_secrets_manager_role_arn != ""
-}
-
 data "aws_iam_policy_document" "lambda_execution" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -55,7 +51,7 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
       "secretsmanager:UpdateSecret"
     ])
     resources = local.should_use_different_account ? ([
-      var.sidecar_secrets_manager_role_arn
+      var.sidecar_certificate_casigned_role_arn
       ]) : ([
       "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecars/certificate/*"
     ])
@@ -63,13 +59,13 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name               = "CyralSidecarCertificateManagerLambdaExecutionRole-${random_id.current.id}"
+  name               = "CyralSidecarCertificateCASignedLambdaExecutionRole-${random_id.current.id}"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.lambda_execution.json
 }
 
 resource "aws_iam_policy" "lambda_execution_policy" {
-  name   = "CyralSidecarCertificateManagerLambdaExecutionPolicy-${random_id.current.id}"
+  name   = "CyralSidecarCertificateCASignedLambdaExecutionPolicy-${random_id.current.id}"
   path   = "/"
   policy = data.aws_iam_policy_document.lambda_execution_policy.json
 }

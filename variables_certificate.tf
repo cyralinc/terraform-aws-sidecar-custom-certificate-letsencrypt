@@ -74,13 +74,8 @@ variable "renew_days_before_expiry" {
   }
 }
 
-variable "sidecar_secrets_manager_role_arn" {
-  description = "Role to assume when accessing secrets manager. Use this if the sidecar is hosted in another account."
-  type        = string
-  default     = ""
-
-  validation {
-    condition     = can(regex("^(arn:.+:iam::[0-9]{12}:role/.+)?$", var.sidecar_secrets_manager_role_arn))
-    error_message = "Please use a valid IAM role ARN."
-  }
+variable "staging_certificate" {
+  description = "Enter true to use a staging (test) certificate. ONLY FOR TESTING, A STAGING CERTIFICATE IS NOT VALID FOR PRODUCTION USE."
+  type        = bool
+  default     = false
 }
