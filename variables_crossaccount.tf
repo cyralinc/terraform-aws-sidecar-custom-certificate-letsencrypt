@@ -5,7 +5,7 @@ variable "sidecar_certficate_casigned_secret_arn" {
 
   validation {
     condition     = can(regex("^(arn:.+:secretsmanager:.+:[0-9]{12}:secret:.+)?$", var.sidecar_certficate_casigned_secret_arn))
-    error_message = "Please use a valid IAM role ARN."
+    error_message = "Please use a valid Secrets Manager secret ARN."
   }
 }
 
