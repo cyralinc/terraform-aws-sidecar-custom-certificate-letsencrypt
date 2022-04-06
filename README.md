@@ -86,7 +86,7 @@ No modules.
 | <a name="input_sidecar_domain"></a> [sidecar\_domain](#input\_sidecar\_domain) | The domain to generate a certificate for. Ex: my-snowflake-sidecar.mydomain.com | `string` | n/a | yes |
 | <a name="input_sidecar_subdomains"></a> [sidecar\_subdomains](#input\_sidecar\_subdomains) | Subdomains to generate a certificate for, delimited by comma. Use SnowflakeAccountRegion instead, if configuring a Snowflake sidecar. | `string` | `""` | no |
 | <a name="input_snowflake_account_region"></a> [snowflake\_account\_region](#input\_snowflake\_account\_region) | The AWS region your Snowflake account is running on. Ex: us-east-1 | `string` | `""` | no |
-| <a name="input_staging_certificate"></a> [staging\_certificate](#input\_staging\_certificate) | Enter true to use a staging (test) certificate. ONLY FOR TESTING, A STAGING CERTIFICATE IS NOT VALID FOR PRODUCTION USE. | `string` | `"false"` | no |
+| <a name="input_staging_certificate"></a> [staging\_certificate](#input\_staging\_certificate) | Enter true to use a staging (test) certificate. ONLY FOR TESTING, A STAGING CERTIFICATE IS NOT VALID FOR PRODUCTION USE. | `bool` | `false` | no |
 
 ## Outputs
 
