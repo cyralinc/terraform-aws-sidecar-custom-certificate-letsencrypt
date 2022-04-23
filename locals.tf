@@ -11,7 +11,7 @@ locals {
 
   # Other
   should_use_different_account = (
-    var.sidecar_certificate_casigned_role_arn != "" &&
-    var.sidecar_certficate_casigned_secret_arn != ""
+    var.sidecar_custom_certificate_role_arn != "" &&
+    var.sidecar_custom_certificate_secret_arn != ""
   )
 }

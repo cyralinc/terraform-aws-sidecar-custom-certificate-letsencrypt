@@ -1,10 +1,10 @@
-# Cyral Sidecar Certificate CASigned module for Terraform
+# Cyral Sidecar Custom Certificate LetsEncrypt module for Terraform
 
 ## Usage
 
-```hcl
-module "cyral_sidecar_certificate_casigned" {
-  source  = "cyralinc/sidecar-certificate-casigned/cyral"
+```terraform
+module "cyral_sidecar_custom_certificate_letsencrypt" {
+  source  = "cyralinc/sidecar-custom-certificate-letsencrypt/cyral"
   version = ">= 1.0.0"
 
   # Required
@@ -22,8 +22,9 @@ module "cyral_sidecar_certificate_casigned" {
   snowflake_account_region = "us-east-1"
 
   # Use if AWS account that hosts the sidecar is different from the one used to
-  # invoke this module. See examples/cross-account for a full example.
-  sidecar_certificate_casigned_role_arn = "arn:aws:iam::111111111111:role/sm-role"
+  # invoke this module. See also variable 'sidecar_custom_certificate_secret_arn',
+  # and examples/cross-account for a full example.
+  sidecar_custom_certificate_role_arn = "arn:aws:iam::111111111111:role/sm-role"
 
   # We recommend you set an email to receive expiry notifications. In case the
   # feature fails to renew the certificate due to an extraordinary event, you
@@ -77,12 +78,12 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_lambda_code_s3_bucket"></a> [lambda\_code\_s3\_bucket](#input\_lambda\_code\_s3\_bucket) | S3 bucket that contains the Lambda deployment package. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT. | `string` | `""` | no |
 | <a name="input_lambda_code_s3_key"></a> [lambda\_code\_s3\_key](#input\_lambda\_code\_s3\_key) | Object key for the Lambda deployment package on the S3 bucket. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT. | `string` | `""` | no |
-| <a name="input_lambda_code_version"></a> [lambda\_code\_version](#input\_lambda\_code\_version) | Version of the Sidecar Certificate CA-Signed Lambda code. | `string` | `"v0.1.0"` | no |
+| <a name="input_lambda_code_version"></a> [lambda\_code\_version](#input\_lambda\_code\_version) | Version of the Sidecar Custom Certificate Lambda code. | `string` | `"v0.3.0"` | no |
 | <a name="input_registration_email"></a> [registration\_email](#input\_registration\_email) | Administrative email to use for registration and recovery contact with Let's Encrypt. | `string` | `""` | no |
 | <a name="input_renew_days_before_expiry"></a> [renew\_days\_before\_expiry](#input\_renew\_days\_before\_expiry) | Number of days before expiry date to renew the certificate. | `number` | `35` | no |
 | <a name="input_renewal_interval_days"></a> [renewal\_interval\_days](#input\_renewal\_interval\_days) | How often to check if certificate should be renewed, in days. | `number` | `1` | no |
-| <a name="input_sidecar_certficate_casigned_secret_arn"></a> [sidecar\_certficate\_casigned\_secret\_arn](#input\_sidecar\_certficate\_casigned\_secret\_arn) | ARN of the secret to store the certificate in. Use this if the sidecar is hosted in another account. | `string` | `""` | no |
-| <a name="input_sidecar_certificate_casigned_role_arn"></a> [sidecar\_certificate\_casigned\_role\_arn](#input\_sidecar\_certificate\_casigned\_role\_arn) | Role to assume when accessing secrets manager. Use this if the sidecar is hosted in another account. | `string` | `""` | no |
+| <a name="input_sidecar_custom_certificate_role_arn"></a> [sidecar\_custom\_certificate\_role\_arn](#input\_sidecar\_custom\_certificate\_role\_arn) | Role to assume when accessing secrets manager. Use this if the sidecar is hosted in another account. | `string` | `""` | no |
+| <a name="input_sidecar_custom_certificate_secret_arn"></a> [sidecar\_custom\_certificate\_secret\_arn](#input\_sidecar\_custom\_certificate\_secret\_arn) | ARN of the secret to store the certificate in. Use this if the sidecar is hosted in another account. | `string` | `""` | no |
 | <a name="input_sidecar_domain"></a> [sidecar\_domain](#input\_sidecar\_domain) | The domain to generate a certificate for. Ex: my-snowflake-sidecar.mydomain.com | `string` | n/a | yes |
 | <a name="input_sidecar_subdomains"></a> [sidecar\_subdomains](#input\_sidecar\_subdomains) | Subdomains to generate a certificate for, delimited by comma. Use SnowflakeAccountRegion instead, if configuring a Snowflake sidecar. | `string` | `""` | no |
 | <a name="input_snowflake_account_region"></a> [snowflake\_account\_region](#input\_snowflake\_account\_region) | The AWS region your Snowflake account is running on. Ex: us-east-1 | `string` | `""` | no |
@@ -92,4 +93,4 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | Secret containing the sidecar certificate |
+| <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | Secret containing the TLS certificate that will be used by the sidecar. |
