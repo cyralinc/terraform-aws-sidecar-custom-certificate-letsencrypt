@@ -27,14 +27,14 @@ resource "aws_lambda_function" "lambda_function" {
 
   environment {
     variables = {
-      CERTIFICATE_MANAGER_SECRET_ID                    = local.certificate_secret_id
-      CERTIFICATE_MANAGER_SIDECAR_DOMAIN               = var.sidecar_domain
-      CERTIFICATE_MANAGER_SIDECAR_SUBDOMAIN            = var.sidecar_subdomains
-      CERTIFICATE_MANAGER_SNOWFLAKE_ACCOUNT_REGION     = var.snowflake_account_region
-      CERTIFICATE_MANAGER_IS_STAGING_CERTIFICATE       = var.staging_certificate
-      CERTIFICATE_MANAGER_REGISTRATION_EMAIL           = var.registration_email
-      CERTIFICATE_MANAGER_RENEW_DAYS_BEFORE_EXPIRY     = var.renew_days_before_expiry
-      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGER_ROLE = var.sidecar_custom_certificate_role_arn
+      CERTIFICATE_MANAGER_SECRET_ID                     = local.certificate_secret_id
+      CERTIFICATE_MANAGER_SIDECAR_DOMAIN                = var.sidecar_domain
+      CERTIFICATE_MANAGER_SIDECAR_SUBDOMAIN             = var.sidecar_subdomains
+      CERTIFICATE_MANAGER_SNOWFLAKE_ACCOUNT_REGION      = var.snowflake_account_region
+      CERTIFICATE_MANAGER_IS_STAGING_CERTIFICATE        = var.staging_certificate
+      CERTIFICATE_MANAGER_REGISTRATION_EMAIL            = var.registration_email
+      CERTIFICATE_MANAGER_RENEWAL_INTERVAL_WINDOW_START = var.renewal_interval_window_start
+      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGER_ROLE  = var.sidecar_custom_certificate_role_arn
     }
   }
 }
