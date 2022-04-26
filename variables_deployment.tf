@@ -1,5 +1,5 @@
 variable "lambda_code_version" {
-  description = "Version of the Sidecar Certificate CA-Signed Lambda code."
+  description = "Version of the Sidecar Custom Certificate Lambda code."
   type        = string
   default     = "v0.3.0"
 }

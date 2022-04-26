@@ -52,24 +52,24 @@ variable "registration_email" {
   default     = ""
 }
 
-variable "renewal_interval_days" {
+variable "renewal_interval_checks" {
   description = "How often to check if certificate should be renewed, in days."
   type        = number
   default     = 1
 
   validation {
-    condition     = 1 <= var.renewal_interval_days && var.renewal_interval_days <= 14
+    condition     = 1 <= var.renewal_interval_checks && var.renewal_interval_checks <= 14
     error_message = "Valid values range from 1 to 14."
   }
 }
 
-variable "renew_days_before_expiry" {
+variable "renewal_interval_window_start" {
   description = "Number of days before expiry date to renew the certificate."
   type        = number
   default     = 35
 
   validation {
-    condition     = (30 <= var.renew_days_before_expiry && var.renew_days_before_expiry <= 60)
+    condition     = (30 <= var.renewal_interval_window_start && var.renewal_interval_window_start <= 60)
     error_message = "Valid values range from 30 to 60."
   }
 }
