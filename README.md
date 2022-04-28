@@ -1,5 +1,9 @@
-# Cyral Sidecar Custom Certificate LetsEncrypt module for Terraform
+# Let's Encrypt-signed custom certificate module for Terraform
 
+ See the [sidecar certificates](https://cyral.com/docs/sidecars/sidecar-certificates#custom-certificate) main
+ page and the [Terraform certificate](https://cyral.com/docs/sidecars/terraform/certificate#lets-encrypt-signed-certificate)
+ documentation for more information on how to use this module.
+ 
 ## Usage
 
 ```terraform
