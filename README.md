@@ -8,7 +8,7 @@
 
 ```terraform
 module "cyral_sidecar_custom_certificate_letsencrypt" {
-  source  = "cyralinc/sidecar-custom-certificate-letsencrypt/cyral"
+  source  = "cyralinc/sidecar-custom-certificate-letsencrypt/aws"
   version = ">= 1.0.0"
 
   # Required
