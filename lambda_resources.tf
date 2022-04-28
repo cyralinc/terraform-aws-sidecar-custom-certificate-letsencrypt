@@ -1,13 +1,13 @@
 locals {
-  lambda_code_real_s3_bucket = var.lambda_code_s3_bucket != "" ? (
-    var.lambda_code_s3_bucket
+  certificate_manager_code_real_s3_bucket = var.certificate_manager_s3_bucket != "" ? (
+    var.certificate_manager_s3_bucket
     ) : (
     "cyral-public-assets-${local.region}"
   )
-  lambda_code_real_s3_key = var.lambda_code_s3_key != "" ? (
-    var.lambda_code_s3_key
+  certificate_manager_code_real_s3_key = var.certificate_manager_code_s3_key != "" ? (
+    var.certificate_manager_code_s3_key
     ) : (
-    "sidecar-custom-certificate/${var.lambda_code_version}/sidecar-custom-certificate-lambda-${var.lambda_code_version}.zip"
+    "sidecar-custom-certificate/${var.certificate_manager_version}/sidecar-custom-certificate-lambda-${var.certificate_manager_version}.zip"
   )
   certificate_secret_id = local.should_use_different_account ? (
     var.sidecar_custom_certificate_secret_arn
@@ -22,8 +22,8 @@ resource "aws_lambda_function" "lambda_function" {
   runtime       = "python3.9"
   handler       = "lambda_index.lambda_handler"
   timeout       = 300
-  s3_bucket     = local.lambda_code_real_s3_bucket
-  s3_key        = local.lambda_code_real_s3_key
+  s3_bucket     = local.certificate_manager_code_real_s3_bucket
+  s3_key        = local.certificate_manager_code_real_s3_key
 
   environment {
     variables = {

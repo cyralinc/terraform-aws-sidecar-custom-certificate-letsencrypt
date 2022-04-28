@@ -1,10 +1,10 @@
-variable "lambda_code_version" {
+variable "certificate_manager_version" {
   description = "Version of the Sidecar Custom Certificate Lambda code."
   type        = string
   default     = "v1.0.0"
 }
 
-variable "lambda_code_s3_bucket" {
+variable "certificate_manager_s3_bucket" {
   description = "S3 bucket that contains the Lambda deployment package. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT."
   type        = string
   default     = ""
