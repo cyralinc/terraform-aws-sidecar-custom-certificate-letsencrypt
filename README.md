@@ -83,9 +83,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_certificate_manager_code_s3_bucket"></a> [certificate\_manager\_code\_s3\_bucket](#input\certificate\_manager\_code\_s3\_bucket) | S3 bucket that contains the Lambda deployment package. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT. | `string` | `""` | no |
+| <a name="input_certificate_manager_code_s3_bucket"></a> [certificate\_manager\_code\_s3\_bucket](#input\_certificate\_manager\_code\_s3\_bucket) | S3 bucket that contains the Lambda deployment package. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT. | `string` | `""` | no |
 | <a name="input_certificate_manager_code_s3_key"></a> [certificate\_manager\_code\_s3\_key](#input\_certificate\_manager\_code\_s3\_key) | Object key for the Lambda deployment package on the S3 bucket. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT. | `string` | `""` | no |
-| <a name="input_certificate_manager_version"></a> [certificate\_manager\_version](#input\_certificate\_manager\_version) | Version of the Sidecar Custom Certificate Lambda code. | `string` | `"v0.3.0"` | no |
+| <a name="input_certificate_manager_version"></a> [certificate\_manager\_version](#input\_certificate\_manager\_version) | Version of the Sidecar Custom Certificate Lambda code. | `string` | `"v1.0.0"` | no |
 | <a name="input_registration_email"></a> [registration\_email](#input\_registration\_email) | Administrative email to use for registration and recovery contact with Let's Encrypt. | `string` | `""` | no |
 | <a name="input_renewal_interval_checks"></a> [renewal\_interval\_checks](#input\_renewal\_interval\_checks) | How often to check if certificate should be renewed, in days. | `number` | `1` | no |
 | <a name="input_renewal_interval_window_start"></a> [renewal\_interval\_window\_start](#input\_renewal\_interval\_window\_start) | Number of days before expiry date to renew the certificate. | `number` | `35` | no |
@@ -100,4 +100,4 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_certificate_secret_arn"></a> [certificate\_secret\_arn](#output\_certificate\_secret\_arn) | ARN of the secret containing the TLS certificate that will be used by the sidecar. |
+| <a name="output_certificate_secret_arn"></a> [certificate\_secret\_arn](#output\_certificate\_secret\_arn) | Secret containing the TLS certificate that will be used by the sidecar. |
