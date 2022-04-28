@@ -100,4 +100,4 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | Secret containing the TLS certificate that will be used by the sidecar. |
+| <a name="output_certificate_secret_arn"></a> [certificate\_secret\_arn](#output\_certificate\_secret\_arn) | ARN of the secret containing the TLS certificate that will be used by the sidecar. |
