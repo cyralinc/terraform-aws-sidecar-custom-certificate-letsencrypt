@@ -18,7 +18,7 @@ module "cyral_sidecar" {
     sidecar_custom_certificate_account_id = "111111111111"
     sidecar_dns_name = local.sidecar_dns_name
 
-    ...
+    ## Remaining of your code goes here...
 }
 
 module "cyral_sidecar_custom_certificate" {
