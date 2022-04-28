@@ -1,7 +1,7 @@
 variable "lambda_code_version" {
   description = "Version of the Sidecar Custom Certificate Lambda code."
   type        = string
-  default     = "v0.3.0"
+  default     = "v1.0.0"
 }
 
 variable "lambda_code_s3_bucket" {
