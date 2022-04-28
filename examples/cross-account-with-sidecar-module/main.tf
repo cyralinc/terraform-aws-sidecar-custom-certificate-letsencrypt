@@ -29,6 +29,6 @@ module "cyral_sidecar_custom_certificate" {
     version = ">= 1.0.0"
 
     sidecar_domain = local.sidecar_dns_name
-    sidecar_custom_certificate_secret_arn = module.sidecar_custom_certificate_secret_arn
-    sidecar_custom_certificate_role_arn = module.sidecar_custom_certificate_role_arn
+    sidecar_custom_certificate_secret_arn = module.cyral_sidecar.sidecar_custom_certificate_secret_arn
+    sidecar_custom_certificate_role_arn = module.cyral_sidecar.sidecar_custom_certificate_role_arn
 }
