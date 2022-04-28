@@ -1,6 +1,6 @@
 locals {
-  certificate_manager_code_real_s3_bucket = var.certificate_manager_s3_bucket != "" ? (
-    var.certificate_manager_s3_bucket
+  certificate_manager_code_real_s3_bucket = var.certificate_manager_code_s3_bucket != "" ? (
+    var.certificate_manager_code_s3_bucket
     ) : (
     "cyral-public-assets-${local.region}"
   )

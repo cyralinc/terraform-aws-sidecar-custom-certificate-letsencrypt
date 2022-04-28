@@ -4,7 +4,7 @@ variable "certificate_manager_version" {
   default     = "v1.0.0"
 }
 
-variable "certificate_manager_s3_bucket" {
+variable "certificate_manager_code_s3_bucket" {
   description = "S3 bucket that contains the Lambda deployment package. LEAVE EMPTY UNLESS YOU WANT TO OVERRIDE THE DEFAULT."
   type        = string
   default     = ""
