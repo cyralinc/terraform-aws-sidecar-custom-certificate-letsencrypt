@@ -3,7 +3,7 @@
 # `sidecar_custom_certificate_role_arn` variables.
 #
 module "cyral_sidecar_custom_certificate" {
-  source = "cyralinc/sidecar-custom-certificate-letsencrypt/cyral"
+  source = "cyralinc/sidecar-custom-certificate-letsencrypt/aws"
   version = ">= 1.0.0"
 
   sidecar_domain = "my-sidecar.my-domain.com"

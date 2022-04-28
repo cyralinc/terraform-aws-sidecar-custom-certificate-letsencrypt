@@ -5,7 +5,7 @@
 # For the configuration below, the application will check the certificate every
 # day, and renew if there are no more than 30 days left until it expires.
 module "cyral_sidecar_custom_certificate" {
-  source = "cyralinc/sidecar-custom-certificate-letsencrypt/cyral"
+  source = "cyralinc/sidecar-custom-certificate-letsencrypt/aws"
   version = ">= 1.0.0"
 
   sidecar_domain = "my-sidecar.my-domain.com"
