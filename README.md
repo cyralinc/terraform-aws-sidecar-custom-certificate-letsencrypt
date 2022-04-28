@@ -33,6 +33,13 @@ module "cyral_sidecar_custom_certificate_letsencrypt" {
 }
 ```
 
+## Debugging
+
+Debugging information can be found in the CloudWatch log stream created by the
+[lambda](lambda_resources.tf). The lambda name is set to 
+`CyralSidecarCustomCertificate-RANDOM_ID` where `RANDOM_ID`is a random
+identifier created at deployment time.
+
 ## Requirements
 
 | Name | Version |
