@@ -1,8 +1,3 @@
-# The sidecar module will output the exact same parameters once you provide the
-# `sidecar_custom_certificate_account_id` as an input. In the example below, the
-# account where the certificate will be created is `111111111111` and the sidecar
-# is running in a different account:
-#
 locals {
     sidecar_dns_name = "sidecar.mycompany.com"
 }
