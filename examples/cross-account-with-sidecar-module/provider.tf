@@ -6,6 +6,6 @@ provider "aws" {
 
 provider "aws" {
   alias   = "custom_certificate"
-  region = "us-east-1"
+  region  = "us-east-1"
   profile = "certificate_account"
 }
