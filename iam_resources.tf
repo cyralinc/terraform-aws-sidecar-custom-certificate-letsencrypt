@@ -44,17 +44,13 @@ data "aws_iam_policy_document" "lambda_execution_policy" {
 
   # Secrets Manager permissions
   statement {
-    actions = local.should_use_different_account ? ([
-      "sts:AssumeRole"
-      ]) : ([
+    actions = [
       "secretsmanager:GetSecretValue",
       "secretsmanager:UpdateSecret"
-    ])
-    resources = local.should_use_different_account ? ([
-      var.sidecar_custom_certificate_role_arn
-      ]) : ([
+    ]
+    resources = [
       "arn:${local.partition}:secretsmanager:${local.region}:${local.account_id}:secret:/cyral/sidecars/certificate/*"
-    ])
+    ]
   }
 }
 

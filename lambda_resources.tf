@@ -9,11 +9,7 @@ locals {
     ) : (
     "sidecar-custom-certificate/${var.lambda_code_version}/sidecar-custom-certificate-lambda-${var.lambda_code_version}.zip"
   )
-  certificate_secret_id = local.should_use_different_account ? (
-    var.sidecar_custom_certificate_secret_arn
-    ) : (
-    aws_secretsmanager_secret.certificate_secret[0].id
-  )
+  certificate_secret_id = aws_secretsmanager_secret.certificate_secret.id
 }
 
 resource "aws_lambda_function" "lambda_function" {
@@ -34,7 +30,7 @@ resource "aws_lambda_function" "lambda_function" {
       CERTIFICATE_MANAGER_IS_STAGING_CERTIFICATE        = var.staging_certificate
       CERTIFICATE_MANAGER_REGISTRATION_EMAIL            = var.registration_email
       CERTIFICATE_MANAGER_RENEWAL_INTERVAL_WINDOW_START = var.renewal_interval_window_start
-      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGER_ROLE  = var.sidecar_custom_certificate_role_arn
+      CERTIFICATE_MANAGER_SIDECAR_SECRETS_MANAGER_ROLE  = ""
     }
   }
 }
